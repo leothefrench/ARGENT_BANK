@@ -1,9 +1,10 @@
 import './sign-in.scss'
+import  { SignInForm } from '../../components/signInForm/SignInForm'
 
 export const SignIn = () => {
   return (
-    <div>
-        Sign-In
-    </div>
+    <main className="main bg-dark">
+      <SignInForm />
+    </main>
   )
 }
