@@ -1,5 +1,7 @@
 import './signInForm.scss'
 import { useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleUser } from '@fortawesome/free-solid-svg-icons'
 
 export const SignInForm = () => {
 
@@ -15,7 +17,8 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => { e.preventDefault
 
   return (
     <section className="sign-in-content">
-        <i className="fa fa-user-circle sign-in-icon"></i>
+        {/* <i className="fa fa-user-circle sign-in-icon"></i> */}
+        <FontAwesomeIcon icon={faCircleUser} className='sign-in-icon'/>
         <h1>Sign In</h1>
         <form onSubmit={handleSubmit}>
             <div className="input-wrapper">
