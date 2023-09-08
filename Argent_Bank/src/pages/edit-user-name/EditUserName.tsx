@@ -1,13 +1,12 @@
-import './user.scss'
+import './edit-user-name.scss'
 import { Account } from '../../components/account/Account'
-import { Link } from 'react-router-dom'
+import { WelcomeBack } from '../../components/welcome-back/WelcomeBack'
 
-export const User = () => {
+export const EditUserName = () => {
   return (
     <main className="main bg-dark">
       <div className="header">
-          <h1>Welcome back<br />Tony Jarvis!</h1>
-          <Link to='/user/edit-username'  className="edit-button">Edit Name</Link>
+          <WelcomeBack firstName='Tony' lastName='Jarvis'/>
       </div>
       <h2 className="sr-only">Accounts</h2>
       <Account title='Argent Bank Checking (x8349)' amount='$2,082.79' description='Available Balance' />

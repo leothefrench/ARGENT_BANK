@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 import { Home } from '../../pages/home/Home'
 import { SignIn } from '../../pages/sign-in/SignIn'
 import { User } from '../../pages/user/User'
+import { EditUserName } from '../../pages/edit-user-name/EditUserName'
 
 export const Router = () => {
   return (
@@ -9,7 +10,8 @@ export const Router = () => {
         <Route path='/' element={ <Home /> } />
         <Route path='/sign-in' element={ <SignIn /> } />
         <Route path='/user' element={ <User /> } />
-        {/* <Route path='*' element={ <Error /> } />  */}
+        <Route path='/user/edit-username' element={ <EditUserName /> } />
+        <Route path='*' element={ <Error /> } /> 
     </Routes>
   )
 }
