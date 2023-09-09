@@ -1,7 +1,17 @@
 import './transactions.scss'
+import { Account } from '../account/Account'
 
-export const Transaction = () => {
+interface AccountProps {
+  title: string;
+  amount: string;
+  description: string;
+}
+
+export const Transaction: React.FC<AccountProps> = ({title, amount, description}) => {
   return (
-    <div>Transaction</div>
+    <main className="main bg-lightBlue">
+      <h2 className="sr-only">Accounts</h2>
+      <Account title={title} amount={amount} description={description} />
+    </main>
   )
 }

@@ -8,7 +8,7 @@ interface WelcomeBackProps {
 export const WelcomeBack: React.FC<WelcomeBackProps> = ({firstName, lastName}) => {
   return (
     <div>
-        <h1>Welcome back</h1><br />
+        <h1 className='titleWelcomeBack'>Welcome back</h1><br />
         <div>
             <input type="text" value={firstName} className='inputWelcomeBack' />
             <input type="text" value={lastName} className='inputWelcomeBack' />

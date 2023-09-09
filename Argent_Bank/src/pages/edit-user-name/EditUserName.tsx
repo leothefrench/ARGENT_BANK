@@ -4,7 +4,7 @@ import { WelcomeBack } from '../../components/welcome-back/WelcomeBack'
 
 export const EditUserName = () => {
   return (
-    <main className="main bg-dark">
+    <main className="main bg-lightBlue">
       <div className="header">
           <WelcomeBack firstName='Tony' lastName='Jarvis'/>
       </div>
