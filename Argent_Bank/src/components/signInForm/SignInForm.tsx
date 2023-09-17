@@ -2,6 +2,7 @@ import './signInForm.scss'
 import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons'
+import { sendDataToAPi } from '../../api/callApi'
 
 export const SignInForm = () => {
 
@@ -12,7 +13,16 @@ const [rememberMe, setRememberMe] = useState<boolean | undefined>(false)
 const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => { setUsername(e.target.value) }
 const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => { setPassword(e.target.value) }
 const handleRememberMeChange = (e: React.ChangeEvent<HTMLInputElement>) => { setRememberMe(e.target.checked) }
-const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => { e.preventDefault()}
+const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+     e.preventDefault();
+     try {
+        await sendDataToAPi(username, password)
+     } catch(error) {
+        console.log(error);
+        
+     }
+    
+    }
 
 
   return (
