@@ -2,9 +2,15 @@ import './signInForm.scss'
 import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons'
-import { sendDataToAPi } from '../../api/callApi'
+import { sendDataToApi } from '../../api/callApi'
+import { login } from '../../reducers/pim'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 export const SignInForm = () => {
+
+const dispatch = useDispatch()
+const navigate = useNavigate()
 
 const [username, setUsername] = useState('')
 const [password, setPassword] = useState('')
@@ -16,16 +22,23 @@ const handleRememberMeChange = (e: React.ChangeEvent<HTMLInputElement>) => { set
 const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
      e.preventDefault();
      try {
-        await sendDataToAPi(username, password)
-     } catch(error) {
-        console.log(error);
+        // Envoie des données à l'API
         
+        const response: ApiResponse = await sendDataToApi({email: username, password: password});
+
+        // Réception du token & utilisation 
+        const { token, firstName, lastName} = response.data;
+        dispatch(login({ token, firstName, lastName} ))
+
+        // Navigue vers la page user - qui a ce endpoint
+        navigate('/user/')
+     } catch (error) {
+        console.log(error);
      }
-    
     }
 
-
   return (
+    <main className="main bg-dark">
     <section className="sign-in-content">
         {/* <i className="fa fa-user-circle sign-in-icon"></i> */}
         <FontAwesomeIcon icon={faCircleUser} className='sign-in-icon'/>
@@ -63,5 +76,6 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
             <button className="sign-in-button" type="submit">Sign In</button>
         </form>
     </section>
+    </main>
   )
 }

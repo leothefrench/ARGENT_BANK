@@ -1,6 +1,12 @@
 import './account.scss'
 
-export const Account = ({ title, amount, description }) => {
+interface AccountProps {
+  title: string,
+  amount: number,
+  description: string
+}
+
+export const Account: React.FC<AccountProps> = ({ title, amount, description }) => {
   return (
     <section className="account">
         <div className="account-content-wrapper">

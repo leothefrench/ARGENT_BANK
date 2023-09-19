@@ -1,33 +1,29 @@
 import axios from 'axios'
 // IMPORT DES INTERFACES TS
-import { LoginData, SignUp, UpsateProfile } from './interfacesCalls'
+import { LoginData, SignUp, UpdateProfile } from './interfacesCalls'
 
 // [ Base URL: localhost:3001/api/v1 ]
 const baseURL = 'http://localhost:3001/api/v1'
 const apiUrlLogin = `${baseURL}/user/login`
 const apiUrlSignup = `${baseURL}/user/signup`
 
-export const sendDataToApi = (data: LoginData) => {
+export const sendDataToApi = async (data: LoginData) => {
     const {email, password} = data
 
     const dataPosted = {
         email: email,
         password: password
-    }
+    } 
+    try {
+    const response = await axios.post(apiUrlLogin, dataPosted)
+    const  { token, firstName, lastName } = response.data.body;
 
-    return axios
-        .post(apiUrlLogin, dataPosted)
-        .then(response => {
-            console.log(response.data);
-            // Récupération du token
-            const token = response.data.body.token
-            // Stockage sécurisé du token dans le localStorage
-            localStorage.setItem('token', token)
-        })
-        .catch(error => {
-            console.error(error);
-            throw error;
-        })
+    return { token, firstName, lastName };
+
+    } catch(error) {
+        console.error(error);
+        throw error;
+    }
 }
 
 export const sendDataToSignUp = (data: SignUp) => {
@@ -82,7 +78,7 @@ export const fetchUserprofile = async () => {
 }
 
 // PUT User profile
-export const updateUserProfile = async (data: UpsateProfile) => {
+export const updateUserProfile = async (data: UpdateProfile) => {
 
     const {firstName, lastName} = data
 
