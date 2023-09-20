@@ -3,9 +3,11 @@ import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons'
 import { sendDataToApi } from '../../api/callApi'
+import { fetchUserProfile } from '../../api/callApi'
 import { login } from '../../reducers/pim'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { ApiResponse } from '../../types';
 
 export const SignInForm = () => {
 
@@ -27,8 +29,10 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         const response: ApiResponse = await sendDataToApi({email: username, password: password});
 
         // Réception du token & utilisation 
-        const { token, firstName, lastName} = response.data;
-        dispatch(login({ token, firstName, lastName} ))
+        const { token } = response;
+        const userProfile = await fetchUserProfile(token)
+
+        dispatch(login({token, ...userProfile}))
 
         // Navigue vers la page user - qui a ce endpoint
         navigate('/user/')

@@ -1,12 +1,18 @@
 import './user.scss'
 import { Account } from '../../components/account/Account'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import {RootState} from '../../types'
 
 export const User = () => {
+
+  const firstName = useSelector((state: RootState) => state.logged.firstName);
+  const lastName = useSelector((state: RootState) => state.logged.lastName);
+
   return (
     <main className="main bg-dark">
       <div className="header">
-          <h1>Welcome back<br />Tony Jarvis!</h1>
+          <h1>Welcome back<br />{firstName} {lastName} !</h1>
           <Link to='/user/edit-username'  className="edit-button">Edit Name</Link>
       </div>
       <h2 className="sr-only">Accounts</h2>

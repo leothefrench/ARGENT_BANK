@@ -46,16 +46,14 @@ export const sendDataToSignUp = (data: SignUp) => {
 }
 
 // POST User Profile
-export const fetchUserprofile = async () => {
+export const fetchUserProfile = async (token: string) => {
     try {
-        const token = localStorage.getItem('token');
-
         // Check if token exist
         if (!token) {
             throw new Error('Token not found');
         }
 
-        // On introduit le Token dans le header du post
+        // On se sert du Token pour le header du la méthode POST
         const headers = {
             'Authorization': `Bearer ${token}`
         }

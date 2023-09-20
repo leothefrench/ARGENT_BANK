@@ -13,7 +13,6 @@ export const Header = () => {
     const firstName = useSelector((state: RootState) => state.logged.firstName)
     console.log(firstName);
     
-
     const dispatch = useDispatch()
 
     const handleSignOut = () => { dispatch(logout())}
@@ -32,7 +31,7 @@ export const Header = () => {
             {isLoggedIn ? (
                 <NavLink to='/user/login' onClick={handleSignOut} className='main-nav-item'>
                     <FontAwesomeIcon icon={faCircleUser} className='faCircleHeader' />
-                    <span>{firstName}</span>
+                    <span className='firstName-signOut'>{firstName}</span>
                     <FontAwesomeIcon icon={faArrowRightFromBracket}  className='faCircleHeader' />
                         Sign Out
                 </NavLink>
