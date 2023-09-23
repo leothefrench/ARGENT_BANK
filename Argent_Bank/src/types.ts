@@ -1,7 +1,9 @@
 export interface RootState {
     logged: {
-        isLoggedIn: boolean
-        firstName: string
+        isLoggedIn: boolean,
+        token: string, 
+        firstName: string,
+        lastName: string
     }
 }
 

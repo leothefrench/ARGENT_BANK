@@ -76,13 +76,11 @@ export const fetchUserProfile = async (token: string) => {
 }
 
 // PUT User profile
-export const updateUserProfile = async (data: UpdateProfile) => {
+export const updateUserProfile = async (token: string,data: UpdateProfile) => {
 
     const {firstName, lastName} = data
 
     try {
-        const token = localStorage.getItem('token');
-
         // Check if token exist
         if (!token) {
             throw new Error('Token not found');
@@ -103,7 +101,7 @@ export const updateUserProfile = async (data: UpdateProfile) => {
         }
 
         // On fait la requête avec POST
-        const response = await axios.put(apiUrlProfile, {dataSendToUpdate}, { headers })
+        const response = await axios.put(apiUrlProfile, dataSendToUpdate, { headers })
 
         // Récupération des datas du profile Updated
         const dataProfileUpdated = response.data.body

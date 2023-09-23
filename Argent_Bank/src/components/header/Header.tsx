@@ -29,14 +29,18 @@ export const Header = () => {
         </NavLink>
         <div>
             {isLoggedIn ? (
-                <NavLink to='/user/login' onClick={handleSignOut} className='main-nav-item'>
-                    <FontAwesomeIcon icon={faCircleUser} className='faCircleHeader' />
-                    <span className='firstName-signOut'>{firstName}</span>
+                <>
+                <FontAwesomeIcon icon={faCircleUser} className='faCircleHeader' />
+                <span className='firstName-signOut'>{firstName}</span>
+                <NavLink to='/' onClick={handleSignOut} className='main-nav-item'>
+                    {/* <FontAwesomeIcon icon={faCircleUser} className='faCircleHeader' />
+                    <span className='firstName-signOut'>{firstName}</span> */}
                     <FontAwesomeIcon icon={faArrowRightFromBracket}  className='faCircleHeader' />
                         Sign Out
                 </NavLink>
+                </>
                 ) : (
-                <NavLink to='/user/login' className='main-nav-item'>
+                <NavLink to='/login' className='main-nav-item'>
                     <FontAwesomeIcon icon={faCircleUser} className='faCircleHeader' />
                     Sign In
                 </NavLink>

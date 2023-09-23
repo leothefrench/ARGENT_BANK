@@ -27,6 +27,8 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         // Envoie des données à l'API
         
         const response: ApiResponse = await sendDataToApi({email: username, password: password});
+        console.log(response);
+        
 
         // Réception du token & utilisation 
         const { token } = response;
@@ -53,7 +55,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
                 <input 
                     type="text" 
                     id="username"
-                    value={username}
+                    defaultValue={username}
                     required
                     onChange={handleUsernameChange}
                 />
@@ -63,7 +65,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
                 <input 
                     type="password"
                     id="password" 
-                    value={password}
+                    defaultValue={password}
                     required
                     onChange={handlePasswordChange}
                 />

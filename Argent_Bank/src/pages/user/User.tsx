@@ -12,8 +12,8 @@ export const User = () => {
   return (
     <main className="main bg-dark">
       <div className="header">
-          <h1>Welcome back<br />{firstName} {lastName} !</h1>
-          <Link to='/user/edit-username'  className="edit-button">Edit Name</Link>
+          <h1>Welcome back<br />{firstName} !</h1>
+          <Link to='/profile'  className="edit-button">Edit Name</Link>
       </div>
       <h2 className="sr-only">Accounts</h2>
       <Account title='Argent Bank Checking (x8349)' amount='$2,082.79' description='Available Balance' />

@@ -1,12 +1,18 @@
 import './edit-user-name.scss'
 import { Account } from '../../components/account/Account'
 import { WelcomeBack } from '../../components/welcome-back/WelcomeBack'
+import { useSelector } from 'react-redux'
+import {RootState} from '../../types'
 
 export const EditUserName = () => {
+
+  const firstName = useSelector((state: RootState) => state.logged.firstName);
+  const lastName = useSelector((state: RootState) => state.logged.lastName);
+
   return (
     <main className="main bg-lightBlue">
       <div className="header">
-          <WelcomeBack firstName='Tony' lastName='Jarvis'/>
+          <WelcomeBack />
       </div>
       <h2 className="sr-only">Accounts</h2>
       <Account title='Argent Bank Checking (x8349)' amount='$2,082.79' description='Available Balance' />
