@@ -5,6 +5,7 @@ const initialState = {
     token: '',
     firstName: '',
     lastName: '',
+    isEditingName: false // Bouton Edit Name
 }
 
 const logSlice = createSlice({
@@ -22,9 +23,12 @@ const logSlice = createSlice({
             state.token = '';
             state.firstName = '';
             state.lastName = '';
+        },
+        toggleEditName: (state) => {
+            state.isEditingName = !state.isEditingName;
         }
     }
 })
 
-export const { login, logout } = logSlice.actions;
+export const { login, logout, toggleEditName } = logSlice.actions;
 export default logSlice.reducer

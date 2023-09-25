@@ -27,7 +27,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         // Envoie des données à l'API
         
         const response: ApiResponse = await sendDataToApi({email: username, password: password});
-        console.log(response);
+        // console.log(response);
         
 
         // Réception du token & utilisation 

@@ -1,7 +1,7 @@
 import './welcome-back.scss'
 
-// import { useState } from 'react';
-import { login } from '../../reducers/pim';
+import { useState, useEffect } from 'react';
+import { login, toggleEditName } from '../../reducers/pim';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateUserProfile } from '../../api/callApi';
 import { RootState } from '../../types';
@@ -11,24 +11,31 @@ interface WelcomeBackProps {
   lastName: string;
 }
 
-export const WelcomeBack: React.FC<WelcomeBackProps> = ({firstName, lastName}) => {
-  
-  // const [newFirstName, setNewFirstName] = useState(firstName || '')
-  // const [newLastName, setNewLastName] = useState(lastName || '')
-  
+export const WelcomeBack: React.FC<WelcomeBackProps> = () => {
+    
   const token = useSelector((state: RootState) =>  state.logged.token)
-  // console.log(token)
   const newFirstName = useSelector((state: RootState) => state.logged.firstName )
   const newLastName = useSelector((state: RootState) => state.logged.lastName )
-
+  
   const dispatch = useDispatch()
+
+  const [localFirstName, setLocalFirstName] = useState(newFirstName);
+  const [localLastName, setLocalLastName] = useState(newLastName);
+
+  useEffect(() => {
+    setLocalFirstName(newFirstName);
+    setLocalLastName(newLastName);
+  }, [newFirstName, newLastName]);
 
   // Handler for save button
   const handleSaveClick = async () => {
-    // I call the API for updating the data for the user profile who are connected
     try {
-      await updateUserProfile(token, {firstName: newFirstName, lastName: newLastName})
-      dispatch(login ({ token, firstName: newFirstName, lastName: newLastName }))
+      // Vérifiez si les champs d'entrée ne sont pas vides avant la mise à jour
+      if (localFirstName.trim() !== '' && localLastName.trim() !== '') {
+        await updateUserProfile(token, { firstName: localFirstName, lastName: localLastName })
+        dispatch(login({ token, firstName: localFirstName, lastName: localLastName }))
+        dispatch(toggleEditName());
+      }
     } catch(error) {
       console.log('Erreur de la mise à jour du profil: ', error)
     }
@@ -36,29 +43,48 @@ export const WelcomeBack: React.FC<WelcomeBackProps> = ({firstName, lastName}) =
 
   // Handler for cancel button
   const handleCancelClick = () => {
-      dispatch(login({token, firstName: '', lastName: '' }))
+    // Réinitialisez les champs d'entrée avec les valeurs du Redux store
+    setLocalFirstName('');
+    setLocalLastName('');
+    // TIMER
+    setTimeout(() => {
+      dispatch(toggleEditName());
+    }, 1000)
+    
+  }
+
+  // Handler for input change
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Mettez à jour l'état local en fonction du champ d'entrée modifié
+    if (e.target.name === 'first-name') {
+      setLocalFirstName(e.target.value);
+    } else if (e.target.name === 'last-name') {
+      setLocalLastName(e.target.value);
+    }
   }
 
   return (
     <div>
-      <h1 className='titleWelcomeBack'>Welcome back {firstName} {lastName}</h1><br/>
+      <h1 className='titleWelcomeBack'>Welcome back</h1><br/>
       <div>
         <input
           type="text"
-          value={newFirstName}
-          onChange={(e) => dispatch(login({token, firstName: e.target.value, lastName: newLastName}))}
+          name="first-name"
+          value={localFirstName}
+          onChange={handleInputChange}
           className='inputWelcomeBack'
         />
         <input
           type="text"
-          value={newLastName}
-          onChange={(e) => dispatch(login({token, firstName: newFirstName, lastName: e.target.value}))}
+          name="last-name"
+          value={localLastName}
+          onChange={handleInputChange}
           className='inputWelcomeBack'
         />
       </div>
       <div>
-        <button className='buttonWelcomeBack' onClick={handleSaveClick}>Save</button>
-        <button className='buttonWelcomeBack' onClick={handleCancelClick}>Cancel</button>
+        <button className='buttonWelcomeBack' name="save" onClick={handleSaveClick}>Save</button>
+        <button className='buttonWelcomeBack' name="cancel" onClick={handleCancelClick}>Cancel</button>
       </div>
     </div>
   );

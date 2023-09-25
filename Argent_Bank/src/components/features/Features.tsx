@@ -40,6 +40,5 @@ export const Features = () => {
             </p>
             </div>
         </section>
-
   )
 }

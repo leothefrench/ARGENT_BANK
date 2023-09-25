@@ -3,7 +3,8 @@ export interface RootState {
         isLoggedIn: boolean,
         token: string, 
         firstName: string,
-        lastName: string
+        lastName: string,
+        isEditingName: boolean,
     }
 }
 

@@ -11,7 +11,6 @@ import { logout } from '../../reducers/pim'
 export const Header = () => {
     const isLoggedIn = useSelector((state: RootState) => state.logged.isLoggedIn)
     const firstName = useSelector((state: RootState) => state.logged.firstName)
-    console.log(firstName);
     
     const dispatch = useDispatch()
 
@@ -33,8 +32,6 @@ export const Header = () => {
                 <FontAwesomeIcon icon={faCircleUser} className='faCircleHeader' />
                 <span className='firstName-signOut'>{firstName}</span>
                 <NavLink to='/' onClick={handleSignOut} className='main-nav-item'>
-                    {/* <FontAwesomeIcon icon={faCircleUser} className='faCircleHeader' />
-                    <span className='firstName-signOut'>{firstName}</span> */}
                     <FontAwesomeIcon icon={faArrowRightFromBracket}  className='faCircleHeader' />
                         Sign Out
                 </NavLink>

@@ -1,19 +1,34 @@
 import './user.scss'
 import { Account } from '../../components/account/Account'
-import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import {RootState} from '../../types'
+import { WelcomeBack } from '../../components/welcome-back/WelcomeBack'
+import {toggleEditName} from '../../reducers/pim'
 
 export const User = () => {
 
   const firstName = useSelector((state: RootState) => state.logged.firstName);
   const lastName = useSelector((state: RootState) => state.logged.lastName);
+  const isEditingName = useSelector((state: RootState) => state.logged.isEditingName)
+
+  const dispatch = useDispatch()
+  
+  const handleToggleEditName = () => {
+    dispatch(toggleEditName())
+  }
 
   return (
     <main className="main bg-dark">
       <div className="header">
-          <h1>Welcome back<br />{firstName} !</h1>
-          <Link to='/profile'  className="edit-button">Edit Name</Link>
+        {isEditingName ? (
+          <WelcomeBack firstName={firstName} lastName={lastName} />
+        ) : (
+          <>
+            <h1 className='titleInUser'>Welcome back</h1><br/>
+            <h1 className='header-name'>{firstName} {lastName}</h1>
+            <button onClick={handleToggleEditName} className="edit-button">Edit Name</button>
+          </>
+        )}
       </div>
       <h2 className="sr-only">Accounts</h2>
       <Account title='Argent Bank Checking (x8349)' amount='$2,082.79' description='Available Balance' />
