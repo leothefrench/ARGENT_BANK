@@ -37,7 +37,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         dispatch(login({token, ...userProfile}))
 
         // Navigue vers la page user - qui a ce endpoint
-        navigate('/user/')
+        navigate('/profile/')
      } catch (error) {
         console.log(error);
      }
