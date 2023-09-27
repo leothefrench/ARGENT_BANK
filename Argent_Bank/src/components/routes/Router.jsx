@@ -10,7 +10,6 @@ export const Router = () => {
         <Route path='/' element={ <Home /> } />
         <Route path='/login' element={ <SignInForm /> } />
         <Route path='/profile' element={ <User /> } />
-        {/* <Route path='/profile' element={ <EditUserName /> } /> */}
         <Route path='*' element={ <Error /> } /> 
     </Routes>
   )
