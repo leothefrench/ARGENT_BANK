@@ -16,7 +16,7 @@ const navigate = useNavigate()
 
 const [username, setUsername] = useState('')
 const [password, setPassword] = useState('')
-const [rememberMe, setRememberMe] = useState<boolean | undefined>(false)
+const [rememberMe, setRememberMe] = useState(false)
 
 const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => { setUsername(e.target.value) }
 const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => { setPassword(e.target.value) }
@@ -25,10 +25,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
      e.preventDefault();
      try {
         // Envoie des données à l'API
-        
         const response: ApiResponse = await sendDataToApi({email: username, password: password});
-        // console.log(response);
-        
 
         // Réception du token & utilisation 
         const { token } = response;
