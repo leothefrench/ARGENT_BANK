@@ -8,7 +8,7 @@ import { RootState } from '../../types';
 
 interface WelcomeBackProps {
   firstName: string;
-  lastName: string;
+  lastName: string; 
 }
 
 export const WelcomeBack: React.FC<WelcomeBackProps> = () => {
@@ -43,7 +43,7 @@ export const WelcomeBack: React.FC<WelcomeBackProps> = () => {
 
   // Handler for cancel button
   const handleCancelClick = () => {
-    // Réinitialisez les champs d'entrée avec les valeurs du Redux store
+    // Réinitialisez les champs d'entrée
     setLocalFirstName('');
     setLocalLastName('');
     // TIMER
@@ -55,7 +55,7 @@ export const WelcomeBack: React.FC<WelcomeBackProps> = () => {
 
   // Handler for input change
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // Mettez à jour l'état local en fonction du champ d'entrée modifié
+    // Mise à jour l'état local en fonction du champ d'entrée modifié
     if (e.target.name === 'first-name') {
       setLocalFirstName(e.target.value);
     } else if (e.target.name === 'last-name') {

@@ -6,7 +6,7 @@ const initialState = {
     firstName: '',
     lastName: '',
     isEditingName: false // Bouton Edit Name
-}
+} 
 
 const logSlice = createSlice({
     name: 'logged',
