@@ -6,7 +6,6 @@ import { WelcomeBack } from '../../components/welcome-back/WelcomeBack'
 import {toggleEditName} from '../../reducers/pim'
 
 export const User = () => {
-
   const firstName = useSelector((state: RootState) => state.logged.firstName);
   const lastName = useSelector((state: RootState) => state.logged.lastName);
   const isEditingName = useSelector((state: RootState) => state.logged.isEditingName)
